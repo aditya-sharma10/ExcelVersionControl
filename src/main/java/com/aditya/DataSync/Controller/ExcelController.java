@@ -1,5 +1,6 @@
 package com.aditya.DataSync.Controller;
 
+import com.aditya.DataSync.Dto.CellData;
 import com.aditya.DataSync.Service.ExcelService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,9 +19,10 @@ public class ExcelController {
     }
 
     @PostMapping("/upload")
-    public List<String> uploadExcel(@RequestParam("file") MultipartFile file)
+    public List<CellData> uploadExcel(
+            @RequestParam("file") MultipartFile file)
             throws IOException {
 
-        return excelService.getSheetNames(file);
+        return excelService.getAllCells(file);
     }
 }

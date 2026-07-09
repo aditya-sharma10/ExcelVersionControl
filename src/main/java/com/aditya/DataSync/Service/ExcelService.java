@@ -1,5 +1,6 @@
 package com.aditya.DataSync.Service;
 
+import com.aditya.DataSync.Dto.CellData;
 import com.aditya.DataSync.Util.ExcelParser;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class ExcelService {
 
         try {
             return excelParser.getSheetNames(workbook);
+        } finally {
+            workbook.close();
+        }
+    }
+    public List<CellData> getAllCells(MultipartFile file) throws IOException {
+
+        Workbook workbook = excelParser.parseWorkbook(file);
+
+        try {
+            return excelParser.readAllCells(workbook);
         } finally {
             workbook.close();
         }

@@ -1,5 +1,6 @@
 package com.aditya.DataSync.Util;
 
+import com.aditya.DataSync.Dto.CellData;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
@@ -96,5 +97,57 @@ public class ExcelParser {
      */
     public void closeWorkbook(Workbook workbook) throws IOException {
         workbook.close();
+    }
+    public List<CellData> readAllCells(Workbook workbook) {
+
+        List<CellData> cells = new ArrayList<>();
+
+        for (Sheet sheet : workbook) {
+
+            for (Row row : sheet) {
+
+                for (Cell cell : row) {
+
+                    String value = "";
+
+                    switch (cell.getCellType()) {
+
+                        case STRING:
+                            value = cell.getStringCellValue();
+                            break;
+
+                        case NUMERIC:
+                            value = String.valueOf(cell.getNumericCellValue());
+                            break;
+
+                        case BOOLEAN:
+                            value = String.valueOf(cell.getBooleanCellValue());
+                            break;
+
+                        case FORMULA:
+                            value = cell.getCellFormula();
+                            break;
+
+                        case BLANK:
+                            value = "";
+                            break;
+
+                        default:
+                            value = "";
+                    }
+
+                    cells.add(new CellData(
+                            sheet.getSheetName(),
+                            row.getRowNum(),
+                            cell.getColumnIndex(),
+                            cell.getAddress().formatAsString(),
+                            value,
+                            cell.getCellType().name()
+                    ));
+                }
+            }
+        }
+
+        return cells;
     }
 }

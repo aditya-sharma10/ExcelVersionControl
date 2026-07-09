@@ -11,30 +11,30 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                bat '.\\mvnw.cmd clean compile'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                bat '.\\mvnw.cmd test'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
+                bat '.\\mvnw.cmd package'
             }
         }
     }
 
     post {
         success {
-            echo 'Build Successful!'
+            echo '✅ Build Successful!'
         }
 
         failure {
-            echo 'Build Failed!'
+            echo '❌ Build Failed!'
         }
     }
 }

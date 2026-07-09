@@ -2,6 +2,7 @@ package com.aditya.DataSync.Service;
 
 import com.aditya.DataSync.Entity.Project;
 import com.aditya.DataSync.Exceptions.DublicateProjectException;
+import com.aditya.DataSync.Exceptions.ProjectNotFoundException;
 import com.aditya.DataSync.Repo.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,14 +43,14 @@ public class ProjectService {
     public Project getProjectById(Long id) {
 
         return projectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found."));
+                .orElseThrow(() -> new ProjectNotFoundException("Project not found."));
     }
 
 
     public Project updateProject(Long id, Project updatedProject) {
 
         Project existingProject = projectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found."));
+                .orElseThrow(() -> new ProjectNotFoundException("Project not found."));
 
         existingProject.setTitle(updatedProject.getTitle());
         existingProject.setDescription(updatedProject.getDescription());
@@ -63,7 +64,7 @@ public class ProjectService {
     public void deleteProject(Long id) {
 
         if (!projectRepository.existsById(id)) {
-            throw new RuntimeException("Project not found.");
+            throw new ProjectNotFoundException("Project not found.");
         }
 
         projectRepository.deleteById(id);
@@ -73,7 +74,7 @@ public class ProjectService {
     public Project getProjectByTitle(String title) {
 
         return projectRepository.findByTitle(title)
-                .orElseThrow(() -> new RuntimeException("Project not found."));
+                .orElseThrow(() -> new ProjectNotFoundException("Project not found."));
     }
 
 }

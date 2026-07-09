@@ -33,7 +33,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Builder.Default
     private boolean active = true;
 
     @Column(nullable = false)

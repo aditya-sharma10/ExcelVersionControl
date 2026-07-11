@@ -35,7 +35,6 @@ This project replaces that workflow with a centralized system where every workbo
 - DTO Architecture
 - Unit Testing (JUnit & Mockito)
 - Jenkins Continuous Integration Pipeline
-- PostgreSQL Database Integration
 
 ---
 

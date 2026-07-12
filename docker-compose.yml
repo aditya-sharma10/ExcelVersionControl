@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_DB: datasync
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: Ad@15790
 
     ports:
       - "5432:5432"
@@ -31,7 +31,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/datasync
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_PASSWORD: Ad@15790
 
 volumes:
   postgres-data:

@@ -11,30 +11,30 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat '.\\mvnw.cmd clean compile'
+                bat '.\\mvnw.cmd clean package'
             }
         }
 
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                bat '.\\mvnw.cmd test'
+                bat 'docker build -t datasync-app .'
             }
         }
 
-        stage('Package') {
+        stage('Deploy') {
             steps {
-                bat '.\\mvnw.cmd package'
+                bat 'docker compose up -d --build'
             }
         }
     }
 
     post {
         success {
-            echo '✅ Build Successful!'
+            echo 'CI/CD Pipeline Executed Successfully'
         }
 
         failure {
-            echo '❌ Build Failed!'
+            echo 'Build Failed'
         }
     }
 }

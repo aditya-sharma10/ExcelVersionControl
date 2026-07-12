@@ -18,8 +18,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   app:
-    build: .
-
+    image: datasync-app
     container_name: datasync-app
 
     depends_on:
@@ -32,6 +31,5 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/datasync
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: Ad@15790
-
 volumes:
   postgres-data:

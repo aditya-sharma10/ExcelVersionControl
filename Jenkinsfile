@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
                 bat '.\\mvnw.cmd clean package'
             }
@@ -21,20 +21,26 @@ pipeline {
             }
         }
 
+        stage('Stop Old Containers') {
+            steps {
+                bat 'docker compose down'
+            }
+        }
+
         stage('Deploy') {
             steps {
-                bat 'docker compose up -d --build'
+                bat 'docker compose up -d'
             }
         }
     }
 
     post {
         success {
-            echo 'CI/CD Pipeline Executed Successfully'
+            echo 'CI/CD Pipeline Executed Successfully!'
         }
 
         failure {
-            echo 'Build Failed'
+            echo 'Build Failed!'
         }
     }
 }

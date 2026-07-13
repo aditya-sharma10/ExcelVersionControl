@@ -413,4 +413,4 @@ Backend Developer | Java & Spring Boot Developer | Finance Technology Enthusiast
 
 # License
 
-This project is developed for educational, learning, and portfolio purposes.
+This project is developed for educational, learning, and portfolio purposes
